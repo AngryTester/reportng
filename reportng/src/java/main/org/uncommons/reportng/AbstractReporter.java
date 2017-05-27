@@ -21,10 +21,11 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
+//import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ResourceBundle;
@@ -102,7 +103,9 @@ public abstract class AbstractReporter implements IReporter
                                 String templateName,
                                 VelocityContext context) throws Exception
     {
-        Writer writer = new BufferedWriter(new FileWriter(file));
+    	OutputStream out=new FileOutputStream(file);
+        Writer writer = new BufferedWriter(new OutputStreamWriter(out,"utf-8"));
+//        Writer writer = new BufferedWriter(new FileWriter(file));
         try
         {
             Velocity.mergeTemplate(classpathPrefix + templateName,
